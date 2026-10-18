@@ -4,8 +4,6 @@ source "https://rubygems.org"
 gem "rails", "~> 8.1.4"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.1"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -31,7 +29,22 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
+gem "aasm"
+gem "active_storage_validations"
+gem "kaminari"
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"
+gem "pundit"
+gem "rails-i18n"
+gem "ransack"
+gem "sentry-rails"
+gem "sentry-ruby"
+gem "simple_form"
+
 group :development, :test do
+  gem "sqlite3", ">= 2.1"
+  gem "dotenv-rails"
+  gem "faker"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
@@ -50,7 +63,12 @@ group :development do
   gem "web-console"
 end
 
+group :production do
+  gem "pg"
+end
+
 group :test do
+  gem "minitest-power_assert"
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"

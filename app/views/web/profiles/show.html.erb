@@ -1,0 +1,45 @@
+<% content_for :title, t(".title") %>
+
+<div class="mb-6 flex items-center justify-between">
+  <h1 class="text-3xl font-bold"><%= t(".title") %></h1>
+  <%= link_to t(".add_bulletin"), new_bulletin_path, class: "rounded bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-500" %>
+</div>
+
+<%= render "web/bulletins/search", q: @q, url: profile_path, categories: @categories, with_state: true %>
+
+<div class="overflow-x-auto rounded-lg border border-gray-200 bg-white">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-gray-100 text-gray-600">
+      <tr>
+        <th class="px-4 py-3"><%= Bulletin.human_attribute_name(:title) %></th>
+        <th class="px-4 py-3"><%= Bulletin.human_attribute_name(:category) %></th>
+        <th class="px-4 py-3"><%= Bulletin.human_attribute_name(:state) %></th>
+        <th class="px-4 py-3"><%= Bulletin.human_attribute_name(:created_at) %></th>
+        <th class="px-4 py-3"><%= t(".actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bulletins.each do |bulletin| %>
+        <tr class="border-t border-gray-200">
+          <td class="px-4 py-3"><%= link_to bulletin.title, bulletin_path(bulletin), class: "hover:text-emerald-600" %></td>
+          <td class="px-4 py-3"><%= bulletin.category.name %></td>
+          <td class="px-4 py-3"><%= bulletin.aasm.human_state %></td>
+          <td class="px-4 py-3"><%= l(bulletin.created_at, format: :short) %></td>
+          <td class="px-4 py-3">
+            <div class="flex flex-wrap items-center gap-3">
+              <%= link_to t(".edit"), edit_bulletin_path(bulletin), class: "text-emerald-700 hover:underline" %>
+              <% if bulletin.may_to_moderate? %>
+                <%= button_to t(".to_moderate"), to_moderate_bulletin_path(bulletin), method: :patch, class: "cursor-pointer text-blue-700 hover:underline" %>
+              <% end %>
+              <% if bulletin.may_archive? %>
+                <%= button_to t(".archive"), archive_bulletin_path(bulletin), method: :patch, form: { data: { turbo_confirm: t("web.confirm") } }, class: "cursor-pointer text-red-700 hover:underline" %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-6"><%= paginate @bulletins %></div>

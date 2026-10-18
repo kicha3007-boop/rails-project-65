@@ -1,0 +1,20 @@
+draft:
+  title: Велосипед
+  description: Горный велосипед в хорошем состоянии
+  state: draft
+  category: transport
+  user: regular
+
+under_moderation:
+  title: Ноутбук
+  description: Ноутбук для учёбы и работы
+  state: under_moderation
+  category: electronics
+  user: regular
+
+published:
+  title: Самокат
+  description: Электросамокат, пробег небольшой
+  state: published
+  category: transport
+  user: other

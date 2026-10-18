@@ -1,0 +1,3 @@
+<% %w[draft under_moderation published].each do |name| %>
+<%= name %>_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "bulletin.png", service_name: "test" %>
+<% end %>

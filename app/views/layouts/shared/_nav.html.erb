@@ -1,0 +1,18 @@
+<header class="border-b border-gray-200 bg-white">
+  <nav class="container mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-4 py-4">
+    <%= link_to t(".brand"), root_path, class: "text-xl font-bold text-emerald-600" %>
+
+    <ul class="flex flex-wrap items-center gap-4 text-sm">
+      <% if signed_in? %>
+        <li><%= link_to t(".add_bulletin"), new_bulletin_path, class: "rounded bg-emerald-600 px-3 py-2 font-medium text-white hover:bg-emerald-500" %></li>
+        <li><%= link_to t(".my_bulletins"), profile_path, class: "text-gray-700 hover:text-emerald-600" %></li>
+        <% if current_user.admin? %>
+          <li><%= link_to t(".admin"), admin_root_path, class: "text-gray-700 hover:text-emerald-600" %></li>
+        <% end %>
+        <li><%= button_to t(".sign_out"), session_path, method: :delete, class: "cursor-pointer text-gray-700 hover:text-emerald-600" %></li>
+      <% else %>
+        <li><%= button_to t(".sign_in"), auth_request_path(:github), data: { turbo: false }, class: "cursor-pointer rounded bg-gray-900 px-3 py-2 font-medium text-white hover:bg-gray-700" %></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>

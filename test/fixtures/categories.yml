@@ -1,0 +1,8 @@
+transport:
+  name: Транспорт
+
+electronics:
+  name: Электроника
+
+empty:
+  name: Пустая

@@ -1,0 +1,13 @@
+<% content_for :title, t(".title") %>
+
+<h1 class="mb-4 text-3xl font-bold"><%= t(".title") %></h1>
+
+<%= render "web/admin/shared/nav" %>
+
+<% if @bulletins.empty? %>
+  <p class="text-gray-500"><%= t(".empty") %></p>
+<% else %>
+  <%= render "web/admin/bulletins/table", bulletins: @bulletins %>
+<% end %>
+
+<div class="mt-6"><%= paginate @bulletins %></div>

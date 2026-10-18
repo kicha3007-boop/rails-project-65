@@ -1,0 +1,7 @@
+<% content_for :title, t(".title") %>
+
+<h1 class="mb-4 text-3xl font-bold"><%= t(".title") %></h1>
+
+<%= render "web/admin/shared/nav" %>
+
+<%= render "web/admin/categories/form", category: @category, submit_label: t(".submit") %>

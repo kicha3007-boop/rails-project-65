@@ -1,0 +1,127 @@
+ru:
+  activerecord:
+    models:
+      bulletin: Объявление
+      category: Категория
+      user: Пользователь
+    attributes:
+      bulletin:
+        title: Заголовок
+        description: Описание
+        category: Категория
+        category_id: Категория
+        image: Фотография
+        state: Состояние
+        user: Автор
+        created_at: Создано
+        state/draft: Черновик
+        state/under_moderation: На модерации
+        state/published: Опубликовано
+        state/rejected: Отклонено
+        state/archived: В архиве
+      category:
+        name: Название
+      user:
+        name: Имя
+        email: Email
+        admin: Администратор
+  layouts:
+    application:
+      title: Доска объявлений
+      footer: "© %{year} Доска объявлений — учебный проект Хекслета"
+    shared:
+      nav:
+        brand: Доска объявлений
+        add_bulletin: Добавить
+        my_bulletins: Мои объявления
+        admin: Админка
+        sign_in: Войти
+        sign_out: Выйти
+  web:
+    confirm: Вы уверены?
+    flash:
+      authentication_required: Войдите, чтобы продолжить
+      not_authorized: Недостаточно прав для этого действия
+      invalid_transition: Это действие недоступно для объявления в текущем состоянии
+    search:
+      title: Поиск
+      category: Категория
+      state: Состояние
+      submit: Искать
+      reset: Сбросить
+    auth:
+      callback:
+        success: Вы вошли в аккаунт
+    sessions:
+      destroy:
+        success: Вы вышли из аккаунта
+    bulletins:
+      index:
+        title: Объявления
+        empty: Объявлений пока нет
+      new:
+        title: Новое объявление
+        submit: Создать объявление
+      edit:
+        title: Редактирование объявления
+        submit: Сохранить объявление
+      create:
+        success: Объявление создано
+      update:
+        success: Объявление обновлено
+      to_moderate:
+        success: Объявление отправлено на модерацию
+      archive:
+        success: Объявление отправлено в архив
+    profiles:
+      show:
+        title: Мои объявления
+        add_bulletin: Добавить объявление
+        actions: Действия
+        edit: Редактировать
+        to_moderate: На модерацию
+        archive: В архив
+    admin:
+      shared:
+        nav:
+          moderation: Модерация
+          bulletins: Все объявления
+          categories: Категории
+      home:
+        index:
+          title: Объявления на модерации
+          empty: Нет объявлений, ожидающих модерации
+      bulletins:
+        index:
+          title: Все объявления
+        table:
+          actions: Действия
+          publish: Опубликовать
+          reject: Вернуть
+          archive: В архив
+        publish:
+          success: Объявление опубликовано
+        reject:
+          success: Объявление возвращено на доработку
+        archive:
+          success: Объявление отправлено в архив
+      categories:
+        index:
+          title: Категории
+          add: Добавить категорию
+          actions: Действия
+          edit: Редактировать
+          destroy: Удалить
+        new:
+          title: Новая категория
+          submit: Создать категорию
+        edit:
+          title: Редактирование категории
+          submit: Сохранить категорию
+        create:
+          success: Категория создана
+        update:
+          success: Категория обновлена
+        destroy:
+          success: Категория удалена
+          failure: Нельзя удалить категорию, в которой есть объявления

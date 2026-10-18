@@ -1,0 +1,28 @@
+<% content_for :title, t(".title") %>
+
+<h1 class="mb-6 text-3xl font-bold"><%= t(".title") %></h1>
+
+<%= render "web/bulletins/search", q: @q, url: root_path, categories: @categories, with_state: false %>
+
+<% if @bulletins.empty? %>
+  <p class="text-gray-500"><%= t(".empty") %></p>
+<% else %>
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <% @bulletins.each do |bulletin| %>
+      <article class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+        <% if bulletin.image.attached? %>
+          <%= image_tag url_for(bulletin.image), alt: bulletin.title, class: "h-48 w-full object-cover" %>
+        <% end %>
+        <div class="p-4">
+          <h2 class="mb-1 text-lg font-semibold">
+            <%= link_to bulletin.title, bulletin_path(bulletin), class: "hover:text-emerald-600" %>
+          </h2>
+          <p class="text-sm text-gray-500"><%= bulletin.category.name %></p>
+          <p class="text-sm text-gray-500"><%= l(bulletin.created_at, format: :short) %></p>
+        </div>
+      </article>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="mt-6"><%= paginate @bulletins %></div>

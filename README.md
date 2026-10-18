@@ -1,31 +1,42 @@
 # Доска объявлений
 
 [![hexlet-check](https://github.com/kicha3007-boop/rails-project-65/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/kicha3007-boop/rails-project-65/actions)
+[![CI](https://github.com/kicha3007-boop/rails-project-65/actions/workflows/ci.yml/badge.svg)](https://github.com/kicha3007-boop/rails-project-65/actions/workflows/ci.yml)
 
-Аналог avito.ru. Сервис, на котором можно размещать объявления и выполнять поиск по существующим. Включает в себя процессы публикации и управлении объявлениями, продвинутый поиск и многое другое.
+Сервис-аналог Avito: пользователи размещают объявления с фотографией, каждое проходит премодерацию. Администраторы публикуют объявление, возвращают его на доработку или отправляют в архив.
 
 Учебный проект Хекслета: https://ru.hexlet.io/programs/rails
-Как это должно работать: https://files.hexlet.app/a/yg1ipy
 
+## Возможности
 
-## Стек
+- Вход через GitHub (OmniAuth)
+- Объявления с категорией и фотографией (Active Storage), проверка размера и формата
+- Жизненный цикл объявления на конечном автомате (AASM): черновик → модерация → опубликовано / отклонено, архив из любого состояния
+- Профиль `/profile` со своими объявлениями и действиями над ними
+- Админка `/admin`: модерация, все объявления, категории; права через Pundit
+- Поиск и фильтры (Ransack), пагинация (Kaminari)
 
-- Ruby
-
-## Установка
-
-<!-- Опишите установку: клонирование, зависимости, переменные окружения -->
+## Установка и запуск
 
 ```bash
 git clone https://github.com/kicha3007-boop/rails-project-65.git
 cd rails-project-65
+make setup   # .env из .env.example, зависимости, Tailwind, база, категории
+make start   # http://localhost:3000
 ```
 
-## Использование
+Для входа через GitHub заполните в `.env` переменные `GITHUB_CLIENT_ID` и `GITHUB_CLIENT_SECRET` из OAuth-приложения GitHub (callback: `http://localhost:3000/auth/github/callback`).
 
-<!-- Добавьте примеры запуска и запись asciinema — именно это смотрит работодатель -->
+## Разработка
 
----
+```bash
+make test    # тесты контроллеров
+make lint    # rubocop и herb-lint (нужен Node.js для npx)
+```
+
+## Деплой
+
+Продакшен ожидает переменные окружения `DATABASE_URL` (PostgreSQL), `SECRET_KEY_BASE`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` и, по желанию, `SENTRY_DSN` для отправки ошибок в Bugsink.
 
 <details>
 <summary>Автоматические тесты Хекслета</summary>
@@ -33,7 +44,3 @@ cd rails-project-65
 Тесты запускаются на каждый коммит. За запуск отвечает файл `.github/workflows/hexlet-check.yml` — не удаляйте и не переименовывайте ни его, ни репозиторий.
 
 </details>
-
-## О Хекслете
-
-[Хекслет](https://ru.hexlet.io/) — школа программирования: авторские программы обучения с практикой, поддержкой наставников и реальными проектами, которые остаются в резюме. Этот репозиторий — один из таких проектов.

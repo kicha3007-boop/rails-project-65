@@ -1,0 +1,11 @@
+<% content_for :title, t(".title") %>
+
+<h1 class="mb-4 text-3xl font-bold"><%= t(".title") %></h1>
+
+<%= render "web/admin/shared/nav" %>
+
+<%= render "web/bulletins/search", q: @q, url: admin_bulletins_path, categories: @categories, with_state: true %>
+
+<%= render "web/admin/bulletins/table", bulletins: @bulletins %>
+
+<div class="mt-6"><%= paginate @bulletins %></div>

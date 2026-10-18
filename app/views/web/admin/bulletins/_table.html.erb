@@ -1,0 +1,36 @@
+<div class="overflow-x-auto rounded-lg border border-gray-200 bg-white">
+  <table class="w-full text-left text-sm">
+    <thead class="bg-gray-100 text-gray-600">
+      <tr>
+        <th class="px-4 py-3"><%= Bulletin.human_attribute_name(:title) %></th>
+        <th class="px-4 py-3"><%= Bulletin.human_attribute_name(:category) %></th>
+        <th class="px-4 py-3"><%= Bulletin.human_attribute_name(:user) %></th>
+        <th class="px-4 py-3"><%= Bulletin.human_attribute_name(:state) %></th>
+        <th class="px-4 py-3"><%= t("web.admin.bulletins.table.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% bulletins.each do |bulletin| %>
+        <tr class="border-t border-gray-200">
+          <td class="px-4 py-3"><%= link_to bulletin.title, bulletin_path(bulletin), class: "hover:text-emerald-600" %></td>
+          <td class="px-4 py-3"><%= bulletin.category.name %></td>
+          <td class="px-4 py-3"><%= bulletin.user.email %></td>
+          <td class="px-4 py-3"><%= bulletin.aasm.human_state %></td>
+          <td class="px-4 py-3">
+            <div class="flex flex-wrap items-center gap-3">
+              <% if bulletin.may_publish? %>
+                <%= button_to t("web.admin.bulletins.table.publish"), publish_admin_bulletin_path(bulletin), method: :patch, form: { data: { turbo_confirm: t("web.confirm") } }, class: "cursor-pointer text-emerald-700 hover:underline" %>
+              <% end %>
+              <% if bulletin.may_reject? %>
+                <%= button_to t("web.admin.bulletins.table.reject"), reject_admin_bulletin_path(bulletin), method: :patch, form: { data: { turbo_confirm: t("web.confirm") } }, class: "cursor-pointer text-amber-700 hover:underline" %>
+              <% end %>
+              <% if bulletin.may_archive? %>
+                <%= button_to t("web.admin.bulletins.table.archive"), archive_admin_bulletin_path(bulletin), method: :patch, form: { data: { turbo_confirm: t("web.confirm") } }, class: "cursor-pointer text-red-700 hover:underline" %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

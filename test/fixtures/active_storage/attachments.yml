@@ -1,0 +1,6 @@
+<% %w[draft under_moderation published].each do |name| %>
+<%= name %>_image:
+  name: image
+  record: <%= name %> (Bulletin)
+  blob: <%= name %>_image_blob
+<% end %>
